@@ -1,0 +1,38 @@
+FROM node:18
+
+RUN apt-get update && apt-get install -y \
+    zip \
+    unzip \
+    curl \
+    nano \
+    micro \
+    sudo
+
+# 👉 Security: do not use the `root` user.
+ENV USER=node
+
+# You can not use `${USER}` here, but reference `/home/node`.
+ENV PATH="/home/node/app/.npm-global/bin:${PATH}"
+# 👉 The `--global` install dir
+ENV NPM_CONFIG_PREFIX="/home/node/app/.npm-global"
+
+WORKDIR /home/node/app
+
+# Set the ownership and permissions before copying package*.json
+RUN chown -R node:node /home/node/app
+RUN chmod -R 777 /home/node/app
+
+RUN mkdir -p "${NPM_CONFIG_PREFIX}"
+
+RUN npm config set prefix "${NPM_CONFIG_PREFIX}"
+#RUN npm config set user "${USER}"
+
+USER ${USER}
+
+COPY --chown=node:node /package*.json /home/node/app
+
+RUN npm install
+
+EXPOSE 5137
+
+CMD ["sh", "-c", "npm run dev -- --host 0.0.0.0"]
