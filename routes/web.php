@@ -14,5 +14,5 @@
 |
 */
 
-    Route::get('/', [IndexController::class, 'index']);
-    Route::get('/hello', [IndexController::class, 'show']);
+Route::get('/', [IndexController::class, 'index']);
+Route::get('/hello', [IndexController::class, 'show']);

@@ -10,6 +10,10 @@
 </head>
 <body>
     @inertia
-
+    <div>
+        <p>
+            hello !!!
+        </p>
+    </div>
 </body>
 </html>

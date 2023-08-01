@@ -29,14 +29,16 @@ services:
     tty: true
     ports:
       - "5173:5173"
-#    environment:
-#      USER: "node"
-#      NPM_CONFIG_PREFIX: "/app/.npm-global"
-#      PATH: "${NPM_CONFIG_PREFIX}/bin:${PATH}"
+    #    environment:
+    #      USER: "node"
+    #      NPM_CONFIG_PREFIX: "/app/.npm-global"
+    #      PATH: "${NPM_CONFIG_PREFIX}/bin:${PATH}"
     working_dir: /home/node/app
     volumes:
-      - /home/node/app/node_modules
-  #            - ./:/app
+      #      - /home/node/app/node_modules
+      - .:/home/node/app
+#    entrypoint: /home/node/app/entrypoint.sh
+  #    command: /home/node/app/entrypoint.sh
 
   #Nginx Service
   webserver:
