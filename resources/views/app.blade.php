@@ -12,7 +12,7 @@
     @inertia
     <div>
         <p>
-            hello !!!
+            hello world!!!
         </p>
     </div>
 </body>

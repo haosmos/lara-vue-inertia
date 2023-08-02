@@ -8,7 +8,6 @@ RUN apt-get update && apt-get install -y \
     micro \
     sudo
 
-# 👉 Security: do not use the `root` user.
 ENV USER=node
 
 # You can not use `${USER}` here, but reference `/home/node`.
@@ -33,12 +32,8 @@ COPY --chown=node:node /package*.json ./
 
 RUN npm install
 
-#RUN mkdir -p /home/node/app
-#RUN chown -R node:node /home/node/app
-#RUN chmod -R 777 /home/node/app
-
 #WORKDIR /home/node/app
-EXPOSE 5137
+EXPOSE 5173
 #ENTRYPOINT ["bash","/home/node/app/entrypoint.sh"]
 CMD ["sh", "-c", "npm run dev -- --host 0.0.0.0"]
 #CMD ["sh", "-c", "npm run build"]
