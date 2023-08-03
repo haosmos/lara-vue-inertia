@@ -4,13 +4,21 @@
 
     use Illuminate\Http\Request;
 
-    class IndexController extends Controller
-    {
+    class IndexController extends Controller {
         public function index() {
-            return inertia('Index/Index');
+            return inertia(
+                'Index/Index',
+                [
+                    'message' => 'Hello from index method!'
+                ]
+            );
         }
 
         public function show() {
-            return inertia('Index/Show');
+            return inertia(
+                'Index/Show',
+                [
+                    'message' => 'Hello from show method!'
+                ]);
         }
     }
