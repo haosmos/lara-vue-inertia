@@ -5,7 +5,8 @@
         <Link
           :href="route('listing.show', {listing: listing.id})"
         >
-          <ListingAddress :listing="listing" />
+          <ListingSpace :listing="listing" class="text-lg" />
+          <ListingAddress :listing="listing" class="text-gray-500" />
         </Link>
       </div>
       <div>
@@ -18,7 +19,7 @@
       <div>
         <Link
           :href="route('listing.destroy', {listing: listing.id})"
-          method="DELETE" as="button"
+          as="button" method="DELETE"
         >
           Delete
         </Link>
@@ -31,6 +32,7 @@
 import {Link} from '@inertiajs/vue3'
 import ListingAddress from '@/Components/ListingAddress.vue'
 import Box from '@/Components/UI/Box.vue'
+import ListingSpace from '@/Components/ListingSpace.vue'
 defineProps({
   listings: Array,
 })
