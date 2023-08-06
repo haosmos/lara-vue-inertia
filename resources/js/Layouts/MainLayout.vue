@@ -1,13 +1,14 @@
 <template>
   <Link href="/listing">Listings</Link>&nbsp;
   <Link href="/listing/create">New Listing</Link>
-                                       <!-- <div>The page with time {{ timer }}</div> -->
-<!--  <div v-if="flashSuccess" class="success">-->
-<!--    {{ flashSuccess }}-->
-<!--  </div>-->
-  <div class="success">
-    {{ console.log(flashSuccess) }}
+
+  <div v-if="flashSuccess" class="success">
+    {{ flashSuccess }}
   </div>
+
+<!--  <div v-if="$page.props.flash.message" class="success">-->
+<!--    {{ $page.props.flash.message }}-->
+<!--  </div>-->
 
   <slot>Default</slot>
 </template>
@@ -21,7 +22,7 @@ import { Link, usePage } from '@inertiajs/vue3'
 
 const page = usePage()
 const flashSuccess = computed(
-  () => page.props.value.flash.success,
+  () => page.props.flash.message,
 )
 // import { ref } from 'vue'
 
