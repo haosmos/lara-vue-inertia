@@ -1,24 +1,33 @@
 <?php
 
-    namespace App\Http\Controllers;
+  namespace App\Http\Controllers;
 
-    use Illuminate\Http\Request;
 
-    class IndexController extends Controller {
-        public function index() {
-            return inertia(
-                'Index/Index',
-                [
-                    'message' => 'Hello from index method!'
-                ]
-            );
-        }
+  use App\Models\Listing;
+  use Illuminate\Http\Request;
+  use Illuminate\Support\Facades\Auth;
 
-        public function show() {
-            return inertia(
-                'Index/Show',
-                [
-                    'message' => 'Hello from show method!'
-                ]);
-        }
+  class IndexController extends Controller {
+
+
+    public function index() {
+
+//      dd(Auth::user());
+
+      return inertia(
+        'Index/Index',
+        [
+          'message' => 'Hello from index method!'
+        ]
+      );
     }
+
+    public function show() {
+      return inertia(
+        'Index/Show',
+        [
+          'message' => 'Hello from show method!'
+        ]
+      );
+    }
+  }
