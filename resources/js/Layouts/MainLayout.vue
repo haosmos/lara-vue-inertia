@@ -15,7 +15,8 @@
             <Link :href="route('logout')" as="button" method="delete">Logout</Link>
           </div>
         </div>
-        <div v-else>
+        <div v-else class="flex items-center gap-2">
+          <Link :href="route('user-account.create')">Register</Link>
           <Link :href="route('login')">Sign-In</Link>
         </div>
       </nav>
@@ -39,7 +40,7 @@ import { Link, usePage } from '@inertiajs/vue3';
 
 const page = usePage();
 const flashSuccess = computed(
-  () => page.props.flash.message
+  () => page.props.flash.message,
 );
 const user = computed(
   () => page.props.user,
