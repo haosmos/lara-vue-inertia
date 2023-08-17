@@ -1,37 +1,46 @@
-<template>
-  <form @submit.prevent="login">
-    <div class="w-1/2 mx-auto">
-      <div>
-        <label for="email" class="label">E-mail</label>
-        <input id="email" v-model="form.email" type="text" class="input" />
-        <div v-if="form.errors.email" class="input-error">{{ form.errors.email }}</div>
-      </div>
-      <div class="mt-4">
-        <label for="password" class="label">Password</label>
-        <input id="password" v-model="form.password" type="password" class="input" />
-        <div v-if="form.errors.password" class="input-error">{{ form.errors.password
-                                                             }}
-        </div>
-      </div>
-      <div class="mt-4">
-        <button class="btn-primary w-full" type="submit">Login</button>
-
-        <div class="mt-2 text-center">
-          <Link :href="route('user-account.create')" class="text-sm text-gray-500">
-          Need an account? Click here
-          </Link>
-        </div>
-      </div>
-    </div>
-  </form>
-</template>
-
-<script setup>
-import { useForm, Link } from '@inertiajs/vue3';
-
-const form = useForm({
-  email: null,
-  password: null,
-});
-const login = () => form.post(route('login.store'));
-</script>
+<?php
+  
+  namespace App\Http\Controllers;
+  
+  use App\Models\Listing;
+  use Illuminate\Http\Request;
+  use Illuminate\Support\Facades\Auth;
+  use Illuminate\Support\Facades\Hash;
+  
+  class IndexController extends Controller
+  {
+    public function index()
+    {
+      // Uncomment the code below
+      // And write all the examples inside dd() call
+      // then visit http://127.0.0.1:8000 (or whatever php artisan serve suggests)
+      // to see the output
+      // dd(Listing::all());
+      // dd(Listing::where('beds', '>=', 4)->orderBy('price', 'asc')->first());
+      // Make sure to copy the code below, but WITHOUT comments, so uncomment it
+      // first (remove // from the beginning of 3 lines below, then copy)
+      // Listing::create([
+      //     'beds' => 2, 'baths' => 2, 'area' => 100, 'city' => 'North', 'street' => 'Tinker st', 'street_nr' => 20, 'code' => 'TS', 'price' => 200_000
+      // ])
+      // dd(Auth::user());
+      // dd(Auth::check());
+      
+      // dd(
+      //     Hash::make('password'),
+      //     '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+      //     Hash::check('password', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi')
+      // );
+      
+      return inertia(
+        'Index/Index',
+        [
+          'message' => 'Hello from Laravel!'
+        ]
+      );
+    }
+    
+    public function show()
+    {
+      return inertia('Index/Show');
+    }
+  }
