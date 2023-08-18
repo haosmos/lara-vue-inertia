@@ -4,16 +4,16 @@
       <div class="flex flex-nowrap items-center">
         <input
           v-model.number="filterForm.priceFrom"
-          type="text" placeholder="Price from"
-          class="input-filter-l w-28"
+          class="input-filter-l w-28" placeholder="Price from"
+          type="text"
         />
         <input
           v-model.number="filterForm.priceTo"
-          type="text" placeholder="Price to"
-          class="input-filter-r w-28"
+          class="input-filter-r w-28" placeholder="Price to"
+          type="text"
         />
       </div>
-      
+
       <div class="flex flex-nowrap items-center">
         <select v-model="filterForm.beds" class="input-filter-l w-28">
           <option :value="null">Beds</option>
@@ -26,32 +26,32 @@
           <option>6+</option>
         </select>
       </div>
-      
+
       <div class="flex flex-nowrap items-center">
         <input
           v-model.number="filterForm.areaFrom"
-          type="text" placeholder="Area from"
-          class="input-filter-l w-28"
+          class="input-filter-l w-28" placeholder="Area from"
+          type="text"
         />
         <input
           v-model.number="filterForm.areaTo"
-          type="text" placeholder="Area to"
-          class="input-filter-r w-28"
+          class="input-filter-r w-28" placeholder="Area to"
+          type="text"
         />
       </div>
-      
-      <button type="submit" class="btn-normal">Filter</button>
+
+      <button class="btn-normal" type="submit">Filter</button>
       <button type="reset" @click="clear">Clear</button>
     </div>
   </form>
 </template>
 
 <script setup>
-import {useForm} from '@inertiajs/inertia-vue3'
+import { useForm } from '@inertiajs/vue3';
 
 const props = defineProps({
   filters: Object,
-})
+});
 
 const filterForm = useForm({
   priceFrom: props.filters.priceFrom ?? null,
@@ -60,7 +60,7 @@ const filterForm = useForm({
   baths: props.filters.baths ?? null,
   areaFrom: props.filters.areaFrom ?? null,
   areaTo: props.filters.areaTo ?? null,
-})
+});
 
 const filter = () => {
   filterForm.get(
@@ -69,16 +69,16 @@ const filter = () => {
       preserveState: true,
       preserveScroll: true,
     },
-  )
-}
+  );
+};
 
 const clear = () => {
-  filterForm.priceFrom = null
-  filterForm.priceTo = null
-  filterForm.beds = null
-  filterForm.baths = null
-  filterForm.areaFrom = null
-  filterForm.areaTo = null
-  filter()
-}
+  filterForm.priceFrom = null;
+  filterForm.priceTo = null;
+  filterForm.beds = null;
+  filterForm.baths = null;
+  filterForm.areaFrom = null;
+  filterForm.areaTo = null;
+  filter();
+};
 </script>

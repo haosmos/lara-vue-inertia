@@ -116,12 +116,5 @@
       return redirect()->route('listing.index')
                        ->with('success', 'Listing was changed!');
     }
-
-
-    public function destroy(Listing $listing) {
-      $listing->delete();
-
-      return redirect()->back()
-                       ->with('success', 'Listing was deleted!');
-    }
+    
   }
