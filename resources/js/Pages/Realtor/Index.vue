@@ -11,7 +11,7 @@
             <Price :price="listing.price" class="text-2xl font-medium" />
             <ListingSpace :listing="listing" />
           </div>
-
+          
           <ListingAddress :listing="listing" />
         </div>
         <div class="flex items-center gap-1 text-gray-600 dark:text-gray-300">

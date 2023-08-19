@@ -5,7 +5,8 @@
         <input
           id="deleted"
           v-model="filterForm.deleted"
-          type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+          type="checkbox"
+          class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
         />
         <label for="deleted">Deleted</label>
       </div>
@@ -14,9 +15,21 @@
 </template>
 
 <script setup>
-import { useForm } from '@inertiajs/inertia-vue3'
+import { reactive, watch } from 'vue';
+import { router } from '@inertiajs/vue3';
+import { debounce } from 'lodash';
 
-const filterForm = useForm({
+const filterForm = reactive({
   deleted: false,
-})
+});
+// reactive / ref / computed
+watch(
+  // 0.5s - cancelled
+  // 
+  filterForm, debounce(() => router.get(
+    route('realtor.listing.index'),
+    filterForm,
+    { preserveState: true, preserveScroll: true },
+  ), 1000),
+);
 </script>
