@@ -8,7 +8,7 @@
           {{ form.errors.beds }}
         </div>
       </div>
-
+      
       <div class="col-span-2">
         <label class="label">Baths</label>
         <input v-model.number="form.baths" class="input" type="text" />
@@ -16,7 +16,7 @@
           {{ form.errors.baths }}
         </div>
       </div>
-
+      
       <div class="col-span-2">
         <label class="label">Area</label>
         <input v-model.number="form.area" class="input" type="text" />
@@ -24,7 +24,7 @@
           {{ form.errors.area }}
         </div>
       </div>
-
+      
       <div class="col-span-4">
         <label class="label">City</label>
         <input v-model="form.city" class="input" type="text" />
@@ -32,7 +32,7 @@
           {{ form.errors.city }}
         </div>
       </div>
-
+      
       <div class="col-span-2">
         <label class="label">Post Code</label>
         <input v-model="form.code" class="input" type="text" />
@@ -40,7 +40,7 @@
           {{ form.errors.code }}
         </div>
       </div>
-
+      
       <div class="col-span-4">
         <label class="label">Street</label>
         <input v-model="form.street" class="input" type="text" />
@@ -48,7 +48,7 @@
           {{ form.errors.street }}
         </div>
       </div>
-
+      
       <div class="col-span-2">
         <label class="label">Street Nr</label>
         <input v-model.number="form.street_nr" class="input" type="text" />
@@ -56,7 +56,7 @@
           {{ form.errors.street_nr }}
         </div>
       </div>
-
+      
       <div class="col-span-6">
         <label class="label">Price</label>
         <input v-model.number="form.price" class="input" type="text" />
@@ -64,7 +64,7 @@
           {{ form.errors.price }}
         </div>
       </div>
-
+      
       <div class="col-span-6">
         <button class="btn-primary" type="submit">Edit</button>
       </div>
@@ -88,15 +88,12 @@ const form = useForm({
   street_nr: props.listing.street_nr,
   price: props.listing.price,
 });
-const update = () => form.put(route('listing.update', { listing: props.listing.id }));
+
+const update = () => form.put(
+  route(
+    'realtor.listing.update',
+    { listing: props.listing.id }
+  ),
+);
 </script>
 
-<style scoped>
-label {
-  margin-right: 2em;
-}
-
-div {
-  padding: 2px
-}
-</style>
