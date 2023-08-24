@@ -25,6 +25,7 @@
           'listings' => Auth::user()
                             ->listings()
                             ->filter($filters)
+                            ->withCount('images')
                             ->paginate(5)
                             ->withQueryString()
         ]

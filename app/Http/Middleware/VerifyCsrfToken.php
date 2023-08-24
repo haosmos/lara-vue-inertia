@@ -11,6 +11,7 @@
      * @var array<int, string>
      */
     protected $except = [
-      '/logout'
+      '/logout',
+      '/realtor/listing/*'
     ];
   }
