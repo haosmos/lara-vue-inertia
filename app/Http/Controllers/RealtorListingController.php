@@ -1,23 +1,23 @@
 <?php
-  
+
   namespace App\Http\Controllers;
-  
+
   use App\Models\Listing;
   use Illuminate\Http\Request;
   use Illuminate\Http\Response;
   use Illuminate\Support\Facades\Auth;
-  
+
   class RealtorListingController extends Controller {
     public function __construct() {
       $this->authorizeResource(Listing::class, 'listing');
     }
-    
+
     public function index(Request $request) {
       $filters = [
         'deleted' => $request->boolean('deleted'),
         ...$request->only(['by', 'order'])
       ];
-      
+
       return inertia(
         'Realtor/Index',
         [
@@ -26,22 +26,20 @@
                             ->listings()
                             ->filter($filters)
                             ->withCount('images')
+                            ->withCount('offers')
                             ->paginate(5)
                             ->withQueryString()
         ]
       );
     }
-    
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Inertia\Response|\Inertia\ResponseFactory
-     */
-    public function create() {
-      // $this->authorize('create', Listing::class);
-      return inertia('Realtor/Create');
+
+    public function show(Listing $listing) {
+      return inertia(
+        'Realtor/Show',
+        ['listing' => $listing->load('offers', 'offers.bidder')]
+      );
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -61,11 +59,21 @@
           'price' => 'required|integer|min:1|max:20000000',
         ])
       );
-      
+
       return redirect()->route('realtor.listing.index')
                        ->with('success', 'Listing was created!');
     }
-    
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Inertia\Response|\Inertia\ResponseFactory
+     */
+    public function create() {
+      // $this->authorize('create', Listing::class);
+      return inertia('Realtor/Create');
+    }
+
     public function edit(Listing $listing) {
       return inertia(
         'Realtor/Edit',
@@ -74,7 +82,7 @@
         ]
       );
     }
-    
+
     public function update(Request $request, Listing $listing) {
       $listing->update(
         $request->validate([
@@ -88,21 +96,21 @@
           'price' => 'required|integer|min:1|max:20000000',
         ])
       );
-      
+
       return redirect()->route('realtor.listing.index')
                        ->with('success', 'Listing was changed!');
     }
-    
+
     public function destroy(Listing $listing) {
       $listing->deleteOrFail();
-      
+
       return redirect()->back()
                        ->with('success', 'Listing was deleted!');
     }
-    
+
     public function restore(Listing $listing) {
       $listing->restore();
-      
+
       return redirect()->back()->with('success', 'Listing was restored!');
     }
   }

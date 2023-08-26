@@ -61,6 +61,7 @@ const props = defineProps({ listing: Object });
 const form = useForm({
   images: [],
 });
+
 const imageErrors = computed(() => Object.values(form.errors));
 const canUpload = computed(() => form.images.length);
 const upload = () => {

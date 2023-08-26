@@ -32,16 +32,26 @@
      * @param \Illuminate\Http\Request $request
      * @return array
      */
+//    public function share(Request $request): array {
+//      return array_merge(parent::share($request), [
+//        'flash' => [
+//          'success' => fn() => $request->session()->get('success')
+//        ],
+//        'user' => $request->user() ? [
+//          'id' => $request->user()->id,
+//          'name' => $request->user()->name,
+//          'email' => $request->user()->email
+//        ] : null
+//      ]);
+//    }
+
     public function share(Request $request): array {
-      return array_merge(parent::share($request), [
-        'flash' => [
-          'success' => fn() => $request->session()->get('success')
-        ],
-        'user' => $request->user() ? [
-          'id' => $request->user()->id,
-          'name' => $request->user()->name,
-          'email' => $request->user()->email
-        ] : null
-      ]);
+      return [...parent::share($request), 'flash' => [
+        'success' => fn() => $request->session()->get('success')
+      ], 'user' => $request->user() ? [
+        'id' => $request->user()->id,
+        'name' => $request->user()->name,
+        'email' => $request->user()->email
+      ] : null];
     }
   }
