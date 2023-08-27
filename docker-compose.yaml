@@ -52,6 +52,13 @@ services:
     volumes:
       - ./docker/mysql/db:/var/lib/mysql/
       - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
 #Volumes:
 volumes:
   mysql:
